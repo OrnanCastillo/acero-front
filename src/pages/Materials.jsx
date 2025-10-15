@@ -23,7 +23,9 @@ export default function Materials() {
         descripcion: "",
         stock: "",
         motivo: 0,
-        detalle: ""
+        detalle: "",
+        kilograms: "",
+        meters: ""
     })
 
     const filteredMaterials = materials.filter(
@@ -56,7 +58,9 @@ export default function Materials() {
                     description: formData.descripcion,
                     stock: Number.parseInt(formData.stock),
                     motivo: parseInt(formData.motivo),
-                    detalle: formData.detalle
+                    detalle: formData.detalle,
+                    kilogramos: parseInt(formData.kilograms),
+                    metros: parseInt(formData.meters)
                 }
 
                 const createdMaterial = await updateMaterial(newMaterial);
@@ -65,7 +69,9 @@ export default function Materials() {
                     idCategoria: formData.categoria,
                     description: formData.descripcion,
                     stock: Number.parseInt(formData.stock),
-                    detalle: formData.detalle
+                    detalle: formData.detalle,
+                    kilogramos: parseInt(formData.kilograms),
+                    metros: parseInt(formData.meters)
                 }
 
                 const createdMaterial = await createMaterial(newMaterial);
@@ -74,9 +80,10 @@ export default function Materials() {
         } catch (error) {
             console.log(error);
         }finally{
-            setFormData({ categoria: "", descripcion: "", stock: "", detalle: "", motivo: 0})
+            setFormData({ categoria: "", descripcion: "", stock: "", detalle: "", motivo: 0, kilograms:"", meters:"" })
             setMostrarFormulario(false)
             setEditandoMaterial(null)
+            location.reload()
         }
 
     }
@@ -88,7 +95,9 @@ export default function Materials() {
             descripcion: material.descripcion,
             stock: material.stock.toString(),
             motivo: 0,
-            detalle: ""
+            detalle: "",
+            kilograms: material.m_kilogramos.toString(),
+            meters: material.m_metros.toString()
         })
         setMostrarFormulario(true)
     }
@@ -96,7 +105,7 @@ export default function Materials() {
     const handleCancelar = () => {
         setMostrarFormulario(false)
         setEditandoMaterial(null)
-        setFormData({ categoria: "", descripcion: "", stock: "", motivo: 2, detalle: "" })
+        setFormData({ categoria: "", descripcion: "", stock: "", motivo: 2, detalle: "", kilograms:"", meters:"" })
     }
 
     if (loading || loadingCategories || loadingMovements) {
@@ -198,6 +207,32 @@ export default function Materials() {
                                         value={formData.stock}
                                         onChange={handleInputChange}
                                         placeholder="Cantidad en stock"
+                                        min="0"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Kilogramos</label>
+                                    <input
+                                        type="number"
+                                        name="kilograms"
+                                        value={formData.kilograms}
+                                        onChange={handleInputChange}
+                                        placeholder="Kilogramos"
+                                        min="0"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Metros</label>
+                                    <input
+                                        type="number"
+                                        name="meters"
+                                        value={formData.meters}
+                                        onChange={handleInputChange}
+                                        placeholder="Metros"
                                         min="0"
                                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                         required

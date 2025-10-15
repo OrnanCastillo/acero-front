@@ -25,9 +25,6 @@ const useMaterials = () => {
         try {
             setLoading(true);
             const newMaterial = await materialsService.createMaterial(newMaterialData);
-            console.log(newMaterial);
-            
-            setMaterials((prevMaterials) => [...prevMaterials, newMaterial.material]);
         } catch (err) {
             setError(err);
             throw err;
@@ -41,13 +38,6 @@ const useMaterials = () => {
         try {
             setLoading(true);
             const newMaterial = await materialsService.updateMaterial(newMaterialData);
-            
-            setMaterials((prevMaterials) => 
-                prevMaterials.map((materialI) => 
-                    materialI.idMaterial === newMaterial.material.idMaterial ? newMaterial.material : materialI
-                )
-            );
-            //setMaterials((prevMaterials) => [...prevMaterials, newMaterial.material]);
         } catch (err) {
             setError(err);
             throw err;
