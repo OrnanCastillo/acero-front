@@ -167,7 +167,7 @@ export default function Tools() {
     
     return (
         <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-7xl mx-auto mt-10">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Inventario de Herramientas</h1>
                     <p className="text-gray-600">Gestión y control del inventario de herramientas de trabajo</p>

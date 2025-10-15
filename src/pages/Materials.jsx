@@ -109,7 +109,7 @@ export default function Materials() {
 
     return (
         <div className="min-h-screen bg-white p-6">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto mt-10">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Gestión de Materiales de Taller</h1>
                     <p className="text-gray-600">Administra el inventario de materiales del taller</p>
@@ -263,16 +263,19 @@ export default function Materials() {
                         <table className="w-full">
                             <thead className="bg-gray-400">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
                                         Descripción
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
                                         Categoría
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
-                                        Stock
+                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
+                                        Kilogramos
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
+                                        Metros lineales
+                                    </th>
+                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
                                         Acciones
                                     </th>
                                 </tr>
@@ -281,28 +284,23 @@ export default function Materials() {
                                 {filteredMaterials.map((material) => (
                                     <tr key={material.idMaterial} className="hover:bg-gray-50">
                                         <td className="px-6 py-4">
-                                            <div className="text-sm font-medium text-gray-900">{material.descripcion}</div>
+                                            <div className="text-sm font-medium text-gray-900 text-center">{material.descripcion}</div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">
                                             <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                                 {material.categoria}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex items-center">
-                                                <span
-                                                className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                                                    material.stock === 0 ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"
-                                                }`}
-                                                >
-                                                    {material.stock} UNIDADES
-                                                </span>
-                                            </div>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-medium text-gray-900 text-center">{material.kilogramos}</div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-medium text-gray-900 text-center">{material.metros}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center">
                                             <button
                                                 onClick={() => handleEditar(material)}
-                                                className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                                                className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1 self-center"
                                             >
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path
@@ -333,14 +331,13 @@ export default function Materials() {
                                             {material.categoria}
                                         </span>
                                     </div>
+                                    <div>
+                                        <h3 className="text-sm font-medium text-gray-900">KILOGRAMOS: {material.kilogramos}</h3>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-sm font-medium text-gray-900">METROS LINEALES: {material.metros}</h3>
+                                    </div>
                                     <div className="flex items-center justify-between">
-                                        <span
-                                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                                            material.stock === 0 ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800"
-                                        }`}
-                                        >
-                                            {material.stock} unidades
-                                        </span>
                                         <button
                                         onClick={() => handleEditar(material)}
                                         className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"

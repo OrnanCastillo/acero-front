@@ -26,7 +26,7 @@ const MovementsHistorial = () => {
 
     return (
         <div className="w-full max-w-7xl mx-auto  py-8 px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
+            <div className="mb-8 mt-10">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Historial de movimientos</h1>
             </div>
             <div className="hidden md:block overflow-x-auto bg-white rounded-lg shadow-lg border border-gray-200">
