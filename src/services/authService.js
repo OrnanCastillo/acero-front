@@ -27,6 +27,6 @@ export const getToken = () => {
     return localStorage.getItem('token');
 };
 
-export const getPermiso = () => {
+export const getPermisoUser = () => {
     return localStorage.getItem('permiso');
 };

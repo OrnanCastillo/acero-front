@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import userService from '../services/userService.js';
-import { getPermiso } from '../services/authService.js';
+import { getPermisoUser } from '../services/authService.js';
 
 const useUsers = () => {
     const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ const useUsers = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const id = getPermiso();
+                const id = getPermisoUser();
                 const data = await userService.getPermiso(parseInt(id));
                 setUsers(data);
             } catch (err) {
