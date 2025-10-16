@@ -146,7 +146,7 @@ export default function Tools() {
                 ubicacion: ""
             })
             setMostrarFormulario(false);
-            location.reload()
+            //location.reload()
         }
 
     }
@@ -166,6 +166,9 @@ export default function Tools() {
         acc[tipo] = (acc[tipo] || 0) + 1;
         return acc;
     }, { ...conteoInicial });
+
+    console.log(errorUser);
+    
 
     return (
         <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
