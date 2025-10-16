@@ -3,6 +3,7 @@ import { useState } from "react";
 import useMaterials from "../hooks/useMaterials";
 import useMaterialCategories from "../hooks/useMaterialCategories";
 import useMovementsTypes from "../hooks/useMovementTypes";
+import useUsers from "../hooks/useUsers";
 
 import Loading from "../components/shared/Loading";
 
@@ -13,6 +14,8 @@ export default function Materials() {
     const { categories, loading: loadingCategories, error: errorCategories } = useMaterialCategories();
 
     const {movements, loading: loadingMovements, error: errorMovements} = useMovementsTypes();
+
+    const {loading: loadingUser, error: errorUser} = useUsers();
 
     const [searchTerm, setSearchTerm] = useState("")
 
@@ -108,7 +111,7 @@ export default function Materials() {
         setFormData({ categoria: "", descripcion: "", stock: "", motivo: 2, detalle: "", kilograms:"", meters:"" })
     }
 
-    if (loading || loadingCategories || loadingMovements) {
+    if (loading || loadingCategories || loadingMovements || loadingUser) {
         return <Loading />;
     }
 
@@ -149,14 +152,16 @@ export default function Materials() {
                                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500 sm:text-sm"
                             />
                         </div>
-                        <div className="flex md:justify-end">
-                            <button
-                                onClick={() => setMostrarFormulario(true)}
-                                className="w-full md:w-auto bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors"
-                            >
-                                Agregar material
-                            </button>
-                        </div>
+                        {!errorUser && ((
+                            <div className="flex md:justify-end">
+                                <button
+                                    onClick={() => setMostrarFormulario(true)}
+                                    className="w-full md:w-auto bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors"
+                                >
+                                    Agregar material
+                                </button>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 
@@ -310,9 +315,11 @@ export default function Materials() {
                                     <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
                                         Metros lineales
                                     </th>
-                                    <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
-                                        Acciones
-                                    </th>
+                                    {!errorUser && ((
+                                       <th className="px-6 py-3 text-center text-xs font-extrabold text-white uppercase tracking-wider">
+                                            Acciones
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -332,22 +339,24 @@ export default function Materials() {
                                         <td className="px-6 py-4">
                                             <div className="text-sm font-medium text-gray-900 text-center">{material.metros}</div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center">
-                                            <button
-                                                onClick={() => handleEditar(material)}
-                                                className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1 self-center"
-                                            >
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                                    />
-                                                </svg>
-                                                EDITAR
-                                            </button>
-                                        </td>
+                                        {!errorUser && ((
+                                            <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center">
+                                                <button
+                                                    onClick={() => handleEditar(material)}
+                                                    className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1 self-center"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                        />
+                                                    </svg>
+                                                    EDITAR
+                                                </button>
+                                            </td>
+                                        ))}
                                     </tr>
                                 ))}
                             </tbody>
@@ -372,22 +381,24 @@ export default function Materials() {
                                     <div>
                                         <h3 className="text-sm font-medium text-gray-900">METROS LINEALES: {material.metros}</h3>
                                     </div>
-                                    <div className="flex items-center justify-between">
-                                        <button
-                                        onClick={() => handleEditar(material)}
-                                        className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-                                        >
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                                />
-                                            </svg>
-                                            Editar
-                                        </button>
-                                    </div>
+                                    {!errorUser && ((
+                                        <div className="flex items-center justify-between">
+                                            <button
+                                                onClick={() => handleEditar(material)}
+                                                className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                                            >
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                    />
+                                                </svg>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         ))}

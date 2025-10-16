@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const data = await loginService(credentials);
             localStorage.setItem("token", data.token);
+            localStorage.setItem("permiso", data.user.id);
             setUser(data.user);
         } catch (err) {
             setError(err.message);

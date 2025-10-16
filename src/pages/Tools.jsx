@@ -1,10 +1,12 @@
 import { useState } from "react";
 import useTools from "../hooks/useTools";
 import Loading from "../components/shared/Loading";
+import useUsers from "../hooks/useUsers";
 
 export default function Tools() {
 
     const { tools, loading, error, createTool, updateTool } = useTools();
+    const {loading: loadingUser, error: errorUser} = useUsers();
 
     const [formData, setFormData] = useState({
         categoria: "",
@@ -149,7 +151,7 @@ export default function Tools() {
 
     }
 
-    if (loading) {
+    if (loading || loadingUser) {
         return <Loading />;
     }
 
@@ -164,7 +166,7 @@ export default function Tools() {
         acc[tipo] = (acc[tipo] || 0) + 1;
         return acc;
     }, { ...conteoInicial });
-    
+
     return (
         <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto mt-10">
@@ -218,14 +220,16 @@ export default function Tools() {
                                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-red-500 focus:border-red-500 sm:text-sm"
                             />
                         </div>
-                        <div className="flex md:justify-end">
-                            <button
-                                onClick={() => setMostrarFormulario(true)}
-                                className="w-full md:w-auto bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors"
-                            >
-                                Agregar herramienta
-                            </button>
-                        </div>
+                        {!errorUser && ((
+                            <div className="flex md:justify-end">
+                                <button
+                                    onClick={() => setMostrarFormulario(true)}
+                                    className="w-full md:w-auto bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors"
+                                >
+                                    Agregar herramienta
+                                </button>
+                            </div>  
+                        ))}
                     </div>
                 </div>
                 {mostrarFormulario && (
@@ -362,9 +366,11 @@ export default function Tools() {
                                     <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
                                         Condición
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
-                                        Acciones
-                                    </th>
+                                    {!errorUser && ((
+                                        <th className="px-6 py-3 text-left text-xs font-extrabold text-white uppercase tracking-wider">
+                                            Acciones
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -389,22 +395,24 @@ export default function Tools() {
                                                 {getEstadoText(herramienta.condicion)}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <button
-                                                onClick={() => handleEditar(herramienta)}
-                                                className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-                                            >
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                                    />
-                                                </svg>
-                                                EDITAR
-                                            </button>
-                                        </td>
+                                        {!errorUser && ((
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <button
+                                                    onClick={() => handleEditar(herramienta)}
+                                                    className="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                        />
+                                                    </svg>
+                                                    EDITAR
+                                                </button>
+                                            </td>
+                                        ))}
                                     </tr>
                                 ))}
                             </tbody>
@@ -439,20 +447,22 @@ export default function Tools() {
                                 <span className="text-gray-500 text-sm block">No. Serie:</span>
                                 <span className="text-gray-700 text-sm">{herramienta.num_serie}</span>
                             </div>
-                            <button
-                            onClick={() => handleEditar(herramienta)}
-                            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-3"
-                            >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                    />
-                                </svg>
-                                Editar
-                            </button>
+                            {!errorUser && ((
+                                <button
+                                    onClick={() => handleEditar(herramienta)}
+                                    className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors duration-200 flex items-center gap-1 mt-3"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                        />
+                                    </svg>
+                                    Editar
+                                </button>
+                            ))}
                         </div>
                     ))}
                 </div>
