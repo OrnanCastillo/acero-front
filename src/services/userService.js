@@ -15,6 +15,20 @@ const userService = {
             throw error;
         }
     },
+    getPermiso: async (idUsuario) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${idUsuario}`);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al obtener permiso');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error en el servicio al obtener permiso usuarios:', error);
+            throw error;
+        }
+    },
 };
 
 export default userService;
