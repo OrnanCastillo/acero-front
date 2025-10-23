@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import toolsService from '../services/toolsService';
+import projectService from '../services/projectService';
 
-const useTools = () => {
-    const [tools, setTools] = useState([]);
+const useProjects = () => {
+    const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchTools = async () => {
+        const fetchProjects = async () => {
             try {
-                const data = await toolsService.getAllTools();
-                setTools(data);
+                const data = await projectService.getAllProjects();
+                setProjects(data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -18,13 +18,13 @@ const useTools = () => {
             }
         };
 
-        fetchTools();
+        fetchProjects();
     }, []);
 
-    const createTool = async (newToolData) => {
+    const createProject = async (newProjectData) => {
         try {
             setLoading(true);
-            const newTool = await toolsService.createTool(newToolData);
+            const newProject = await projectService.createProject(newProjectData);
         } catch (err) {
             setError(err);
             throw err;
@@ -33,10 +33,10 @@ const useTools = () => {
         }
     };
 
-    const updateTool = async (newToolData) => {
+    const updateProject = async (newProjectData) => {
         try {
             setLoading(true);
-            const newTool = await toolsService.updateTool(newToolData);
+            const newProject = await projectService.updateProject(newProjectData);
         } catch (err) {
             setError(err);
             throw err;
@@ -45,10 +45,10 @@ const useTools = () => {
         }
     };
 
-    const disableTool = async (id) => {
+    const disableProject = async (id) => {
         try {
             setLoading(true);
-            const newTool = await toolsService.disableTool(id);
+            const newProject = await projectService.disableProject(id);
         } catch (err) {
             setError(err);
             throw err;
@@ -57,7 +57,7 @@ const useTools = () => {
         }
     };
 
-    return { tools, loading, error, createTool, updateTool, disableTool};
+    return { projects, loading, error, createProject, updateProject, disableProject};
 };
 
-export default useTools;
+export default useProjects;

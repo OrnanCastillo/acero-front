@@ -59,6 +59,41 @@ const toolsService = {
             throw error;
         }
     },
+    disableTool: async (id) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/tools/disable/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al desactivar la herramienta');
+            }
+            
+            const newTool = await response.json();
+            return newTool;
+        } catch (error) {
+            console.error('Error en el servicio al desactivar herramienta:', error);
+            throw error;
+        }
+    },
+    getLocations: async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/tools/locations`);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al obtener ubicaciones');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error en el servicio al obtener ubicaciones:', error);
+            throw error;
+        }
+    },
 };
 
 export default toolsService;
