@@ -88,7 +88,7 @@ export default function Projects() {
 
     return (
         <div className="min-h-screen bg-gray-50 py-4 sm:py-8 px-3 sm:px-4 lg:px-6">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-7xl mx-auto mt-10">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Gestión de Obras</h1>
                     {!errorUser && (
