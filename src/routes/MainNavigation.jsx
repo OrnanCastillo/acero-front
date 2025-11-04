@@ -4,6 +4,7 @@ import Tools from "../pages/Tools";
 import Materials from "../pages/Materials";
 import MovementsHistorial from "../pages/MovementstHistorial";
 import Projects from "../pages/Projects";
+import MaterialsList from "../pages/MaterialsList";
 
 import PrivateRoutes from "./PrivateRoutes";
 import Sidebar from "../components/shared/Sidebar";
@@ -33,6 +34,14 @@ const MainNavigation = () => {
                         element={
                             <PrivateRoutes>
                                 <Tools />
+                            </PrivateRoutes>
+                        }
+                    />
+                    <Route
+                        path="/Materiales"
+                        element={
+                            <PrivateRoutes>
+                                <MaterialsList />
                             </PrivateRoutes>
                         }
                     />
