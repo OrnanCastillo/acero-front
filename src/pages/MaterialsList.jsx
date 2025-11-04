@@ -1,22 +1,35 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+
+import vigas from '../assets/viga.png';
+import canales from '../assets/canal.png';
+import angulos from '../assets/angulo.png';
+import soleras from '../assets/solera.png';
+import redondos from '../assets/redondos.png';
+import tubo from '../assets/tubo.png';
+import polin from '../assets/polin.png';
+import ptr from '../assets/ptr.png';
+import tablero from '../assets/tablero.png';
+import hss from '../assets/hss.png';
+import placas from '../assets/placa.png';
+import lamina from '../assets/lamina.png';
 
 export default function MaterialsList() {
 
     const navigate = useNavigate()
 
     const cards = [
-        { id: 1, title: "Vigas", image: "../src/assets/viga.png", href: "Vigas"},
-        { id: 2, title: "Canales", image: "../src/assets/canal.png", href: "#"},
-        { id: 3, title: "Ángulos", image: "../src/assets/angulo.png", href: "#"},
-        { id: 4, title: "Soleras", image: "../src/assets/solera.png", href: "#"},
-        { id: 5, title: "Redondos y Cuadrados", image: "../src/assets/redondos.png", href: "#"},
-        { id: 6, title: "Tubo", image: "../src/assets/tubo.png", href: "#"},
-        { id: 7, title: "Polin", image: "../src/assets/polin.png", href: "#"},
-        { id: 8, title: "PTR", image: "../src/assets/ptr.png", href: "#"},
-        { id: 9, title: "Tablero y Duela", image: "../src/assets/tablero.png", href: "#"},
-        { id: 10, title: "HSS", image: "../src/assets/hss.png", href: "#"},
-        { id: 11, title: "Placas", image: "../src/assets/placa.png", href: "#"},
-        { id: 12, title: "Lámina", image: "../src/assets/lamina.png", href: "#"}
+        { id: 1, title: "Vigas", image: vigas, href: "Vigas"},
+        { id: 2, title: "Canales", image: canales, href: "#"},
+        { id: 3, title: "Ángulos", image: angulos, href: "#"},
+        { id: 4, title: "Soleras", image: soleras, href: "#"},
+        { id: 5, title: "Redondos y Cuadrados", image: redondos, href: "#"},
+        { id: 6, title: "Tubo", image: tubo, href: "#"},
+        { id: 7, title: "Polin", image: polin, href: "#"},
+        { id: 8, title: "PTR", image: ptr, href: "#"},
+        { id: 9, title: "Tablero y Duela", image: tablero, href: "#"},
+        { id: 10, title: "HSS", image: hss, href: "#"},
+        { id: 11, title: "Placas", image: placas, href: "#"},
+        { id: 12, title: "Lámina", image: lamina, href: "#"}
     ]
 
     const handleNavigation = (href) => {
