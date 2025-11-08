@@ -60,6 +60,29 @@ const materialsService = {
             throw error;
         }
     },
+    updatePlates: async (materialData) => {
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/materials/plate/${materialData.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(materialData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al crear un nuevo material');
+            }
+            
+            const newMaterial = await response.json();
+            return newMaterial;
+        } catch (error) {
+            console.error('Error en el servicio al crear material:', error);
+            throw error;
+        }
+    },
     getMovementsType: async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/materials/types`);
@@ -85,6 +108,42 @@ const materialsService = {
             return data;
         } catch (error) {
             console.error('Error en el servicio al obtener movimientos:', error);
+            throw error;
+        }
+    },
+    createPlates: async (materialData) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/materials/plate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(materialData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al crear un nuevo material');
+            }
+            
+            const newMaterial = await response.json();
+            return newMaterial;
+        } catch (error) {
+            console.error('Error en el servicio al crear material:', error);
+            throw error;
+        }
+    },
+    getAllPlates: async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/materials/plates`);
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al obtener materiales');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error en el servicio al obtener materiales:', error);
             throw error;
         }
     },

@@ -5,6 +5,7 @@ import Materials from "../pages/Materials";
 import MovementsHistorial from "../pages/MovementstHistorial";
 import Projects from "../pages/Projects";
 import MaterialsList from "../pages/MaterialsList";
+import Plates from "../pages/Plates";
 
 import PrivateRoutes from "./PrivateRoutes";
 import Sidebar from "../components/shared/Sidebar";
@@ -50,6 +51,14 @@ const MainNavigation = () => {
                         element={
                             <PrivateRoutes>
                                 <Materials />
+                            </PrivateRoutes>
+                        }
+                    />
+                    <Route
+                        path="/Materiales/Placas"
+                        element={
+                            <PrivateRoutes>
+                                <Plates />
                             </PrivateRoutes>
                         }
                     />

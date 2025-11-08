@@ -28,7 +28,7 @@ export default function MaterialsList() {
         { id: 8, title: "PTR", image: ptr, href: "#"},
         { id: 9, title: "Tablero y Duela", image: tablero, href: "#"},
         { id: 10, title: "HSS", image: hss, href: "#"},
-        { id: 11, title: "Placas", image: placas, href: "#"},
+        { id: 11, title: "Placas", image: placas, href: "Placas"},
         { id: 12, title: "Lámina", image: lamina, href: "#"}
     ]
 
