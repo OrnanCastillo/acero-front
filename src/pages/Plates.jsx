@@ -114,6 +114,19 @@ export default function Plates() {
         return <p style={{ color: 'red' }}>Error: {error}</p>;
     }
 
+    if (filteredMaterials.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                    No hay material que mostrar.
+                </h1>
+                <p className="text-gray-600 text-lg">
+                    No hay placas registradas aún.
+                </p>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-white p-6">
             <div className="max-w-6xl mx-auto mt-10">
@@ -386,20 +399,6 @@ export default function Plates() {
                             </div>
                         ))}
                     </div>
-
-                    {filteredMaterials.length === 0 && (
-                        <div className="text-center py-12">
-                            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2M4 13h2m0 0V9a2 2 0 012-2h2m0 0V6a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V9a2 2 0 01-2 2h-2m0 0v2a2 2 0 002 2h2a2 2 0 002-2v-2"
-                                />
-                            </svg>
-                            <h3 className="mt-2 text-sm font-medium text-gray-900">No hay materiales</h3>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

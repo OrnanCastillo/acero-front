@@ -24,6 +24,19 @@ const MovementsHistorial = () => {
         }
     }
 
+    if (historial.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                    Historial de movimientos
+                </h1>
+                <p className="text-gray-600 text-lg">
+                    No hay movimientos registrados aún.
+                </p>
+            </div>
+        );
+    }
+
     return (
         <div className="w-full max-w-7xl mx-auto  py-8 px-4 sm:px-6 lg:px-8">
             <div className="mb-8 mt-10">
